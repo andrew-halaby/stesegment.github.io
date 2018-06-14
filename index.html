@@ -45,7 +45,8 @@
             destination: destination, 
             details: details
         };
-        analytics.identify('12345', {
+        var myUserId = "";
+        analytics.identify(myUserId, {
             email: email, 
             name: fullname
         });
