@@ -46,13 +46,20 @@
             details: details
         };
         var myUserId = "";
+          
         analytics.identify(myUserId, {
             email: email, 
             name: fullname
         });
-        analytics.track('destination submitted', user, function() {
-            window.location.href = "";
-        });
+          
+        //analytics.track(event, [properties], [options], [callback]);
+        analytics.track(
+                'Destination Submitted',
+                user,
+                { context: { ip: "0.0.0.0" }},
+                function() { window.location.href = "";}
+        );
+          
         analytics.alias('12345');
       }
 </script>
