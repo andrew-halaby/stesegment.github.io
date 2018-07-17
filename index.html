@@ -3,7 +3,6 @@
 <head> 
     <title>Home Questionnaire<span id="selection-marker-1" class="redactor-selection-marker"></span></title> 
 
-    
     <!--Placeholder for Segment Snippet --> 
     <script>
       !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var o=document.getElementsByTagName("script")[0];o.parentNode.insertBefore(n,o);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
@@ -29,22 +28,38 @@
 
 </head> 
 <body>
-    
+
+    <script>
+            //just adding a constructor to the String object
+            // will be using it to create a userID from email
+            String.prototype.hashCode = function() {
+                var hash = 0;
+                if (this.length == 0) {
+                    return hash;
+                }
+                for (var i = 0; i < this.length; i++) {
+                    var char = this.charCodeAt(i);
+                    hash = ((hash<<5)-hash)+char;
+                    hash = hash & hash; // Convert to 32bit integer
+                }
+                return hash;
+            }
+    </script>
     
     
 <h1>What is your favorite place to travel?</h1> 
 <p>I am building a directory of the sweetest travel destinations.</p>  
 <form name="travel" onsubmit="identify(event)">
      What is your favorite travel destination?
-    <input name="destination" required="" size="81" type="text" value="Bangkok"/> 
+    <input name="destination" required="" size="81" type="text" value="Bergamo"/> 
     <br><br><br> 
     Any recommendations (cool things to do, places to visit or restaurants to eat)? 
     <br><br> 
-    <textarea cols="81" name="details" required="" rows="10">check out the fantastic street food</textarea> 
+    <textarea cols="81" name="details" required="" rows="10">check out the fantastic food</textarea> 
     <br><br> 
-    Name: <input name="fullname" required="" size="75" type="text" value="Stefano"/> 
+    Name: <input name="fullname" required="" size="75" type="text" value="Pipps"/> 
     <br><br> 
-    Email: <input name="email" required="" size="75" type="email" value="stefano@segment.com"/> 
+    Email: <input name="email" required="" size="75" type="email" value="pippo@pota.bg"/> 
     <br><br>
     <input name="submit" type="submit" value="submit"/>
 </form> 
@@ -63,7 +78,7 @@
             destination: destination, 
             details: details
         };
-        var myUserId = "";
+        var myUserId = email.hashCode();
           
         analytics.identify(myUserId, {
             email: email, 
@@ -78,7 +93,7 @@
                 function() { window.location.href = "";}
         );
           
-        analytics.alias('12345');
+        analytics.alias('88888');
       }
     </script>
     
