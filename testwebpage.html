@@ -52,7 +52,7 @@ function printQs() {
      with values received in the querystring
 -->
 <script>
-	analytics.user().anonymousId(document.location.search.substring(1).split('&')[1].split("=")[1])//anonymousId
+	analytics.user().anonymousId(document.location.search.substring(1).split('&')[1].split("=")[1]);//anonymousId
 	// ...
 	analytics.identify(document.location.search.substring(1).split('&')[0].split("=")[1]);
 </script>
