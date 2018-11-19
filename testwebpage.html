@@ -46,7 +46,16 @@ function printQs() {
 			printQs();
 		</script>
 	</pre>
-	 
+
+	
+<!-- Segment overriding userId and anonymousId
+     with values received in the querystring
+-->
+<script>
+	analytics._user.anonymousId(document.location.search.substring(1).split('&')[1].split("=")[1];)//anonymousId
+	// ...
+	analytics.identify(document.location.search.substring(1).split('&')[0].split("=")[1]);
+</script>
 
 </body>
 </html>
