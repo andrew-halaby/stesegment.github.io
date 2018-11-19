@@ -8,7 +8,7 @@
 				
 				/* START modification of standard Segment snippet: setting the anonymousId immediately
 				   and before the first call to Segment which is the page() included in the snippet */
-				analytics.user().anonymousId(document.location.search.substring(1).split('&')[1].split("=")[1]);
+				analytics._user.anonymousId(document.location.search.substring(1).split('&')[1].split("=")[1]);
 				/* END */
 				
 				analytics.page();
