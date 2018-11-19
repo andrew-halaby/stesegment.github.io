@@ -12,7 +12,7 @@
  <p>and contains:</p>
  
  <script type="text/javascript">
-function formatQs() {
+function printQs() {
 	var output = {};
 	var qs = document.location.search.substring(1);
 	qs = qs.split('&');
@@ -25,6 +25,8 @@ function formatQs() {
 
 	//return output;
 } 
+	 
+printQs();
 
   </script>
 </body>
