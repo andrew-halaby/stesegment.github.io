@@ -21,7 +21,7 @@ function printQs() {
 		var tokens = qs[i].split('=');
 		//output[tokens[0].toLowerCase()] = tokens[1];
 		document.write(tokens[0]+" = "+tokens[1]);
-		//document.write("\n");
+		document.write("\n");
 	}
 	//return output;
 }
@@ -29,7 +29,9 @@ function printQs() {
 	
 <h4>and contains:</h4>
 	<pre>
-		<script type="text/javascript">printQs();</script>
+		<script type="text/javascript">
+			printQs();
+		</script>
 	</pre>
 	 
 
