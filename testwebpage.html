@@ -9,5 +9,23 @@
  console.log(window.location.search);
 </script>
 
+ <p>and contains:</p>
+ 
+ <script type="text/javascript">
+function formatQs() {
+	var output = {};
+	var qs = document.location.search.substring(1);
+	qs = qs.split('&');
+
+	for (var i = 0; i < qs.length; i++) {
+		var tokens = qs[i].split('=');
+	  //output[tokens[0].toLowerCase()] = tokens[1];
+   console.log(tokens[0]+" = "+tokens[1]);
+	}
+
+	//return output;
+} 
+
+  </script>
 </body>
 </html>
