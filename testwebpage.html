@@ -4,15 +4,14 @@
 
 <h1>Test Web Page</h1>
 <h4>The query string looks like:</h4>
+
 <pre>
+	<script type="text/javascript">
+		document.write(window.location.search);
+	</script>
+</pre>
+
 <script type="text/javascript">
- document.write(window.location.search);
-</script>
-	</pre>
-
- <h4>and contains:</h4>
-
- <script type="text/javascript">
 function printQs() {
 	var output = {};
 	var qs = document.location.search.substring(1);
@@ -25,11 +24,13 @@ function printQs() {
 		document.write("\n");
 	}
 	//return output;
-} 
-<pre>
-printQs();
-</pre>
+}
+	
+<h4>and contains:</h4>
+	<pre>
+		<script type="text/javascript">printQs();</script>
+	</pre>
 	 
-  </script>
+
 </body>
 </html>
