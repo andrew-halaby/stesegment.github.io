@@ -6,10 +6,11 @@
   		!function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
   		analytics.load("P6jjRzzLui4BzLgd2NoT3p1kUlWwvS4T");
 		/* this is the moment in time when we would fire the page() call with the default snippet */
-		console.log("timestamp of firing page call    : " + (new Date).format("dd/MM/yyyy HH:mm:ss fff"));
+		var t0 = performance.now();
 		/*let's track  the time stamp of when the analytics function is ready*/
 		analytics.ready(function() {
-			console.log("timestamp of analytics ready event: " + (new Date).format("dd/MM/yyyy HH:mm:ss fff"));
+			var t1 = performance.now();
+			console.log("time between page call and analytics ready event: " + (t1 - t0) + " milliseconds.");
 		});
 		/* First Segment call is customized to overwrite the anonimusID with the value from the querystring */
 		analytics.page({},{anonymousId: document.location.search.substring(1).split('&')[1].split("=")[1]});
