@@ -1,2 +1,2 @@
 # stesegment.github.io
-oboarding trasining a.js
+oboarding training a.js turned my test environment :-)
