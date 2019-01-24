@@ -32,11 +32,29 @@
                 {
                 AppsFlyer:
                   {
-                  appsFlyerId: '1415211453000-6513894'
+                  appsFlyerId: querystring.substring(1).split('&')[3].split("=")[1]
                   }
                 }//integration
               });//page
   		}}();
+		
+		
+		// let's save the context object and integration object in a var so we can use it later for all other Segment calls on the page
+		var segment_context = {
+                "device":
+                  {
+                   "type": querystring.substring(1).split('&')[1].split("=")[1],
+                   "advertisingId": querystring.substring(1).split('&')[2].split("=")[1]
+                  }
+                };
+		
+		var segment_integrations = {
+                "AppsFlyer":
+                  {
+                  "appsFlyerId": querystring.substring(1).split('&')[3].split("=")[1]
+                  }
+                };
+		
 	</script>
 	
 	</head>
@@ -56,8 +74,10 @@
 		<li>advertisiing Id</li>
 		<li>AppsFlyer's Id</li>
 	</ul>
-<p>from the query string and pass them on into the first page() call on the page
-</p>
+<p>from the query string and pass them on into the first page() call on the page</p>
+
+<p><b>HOWEVER,</b> since Appsflyer doesn't accept page() calls (!!!) we will add all these parameters to an identify() call fired on this page</p>
+
 <h4 style="font-family:verdana;">The query string looks like:</h4>
 
 <pre style="font-size:60%;color:blue">
@@ -91,7 +111,11 @@ function printQs() {
 
 <script type="text/javascript">
 	// Calling Segment identify()
-	analytics.identify("appsflyeruser");
+	// analytics.identify([userId], [traits], [options], [callback]);
+	analytics.identify("appsflyeruser",{},{
+		context: segment_context,
+		integrations: segment_integrations
+	});
 </script>
 
 </body>
