@@ -6,9 +6,20 @@
   		!function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
   		analytics.load("P6jjRzzLui4BzLgd2NoT3p1kUlWwvS4T");
 		/* First Segment call is customized to overwrite the anonimusID with the value from the querystring */
+		// 1. setting the anonymousId before the very first Segment call on the page
+		analytics.user().anonymousId(document.location.search.substring(1).split('&')[0].split("=")[1]);
+		// 2. adding context to the call
+		var querystring = decodeURIComponent(document.location.search);
 		analytics.page({},{
                       device: {
-                         id: document.location.search.substring(1).split("=")[1]
+                         id: querystring.substring(1).split('&')[1].split("=")[1],
+			 type: querystring.substring(1).split('&')[2].split("=")[1],
+			 advertisingId: querystring.substring(1).split('&')[3].split("=")[1],
+			 adTrackingEnabled: querystring.substring(1).split('&')[4].split("=")[1],
+			 manufacturer: querystring.substring(1).split('&')[5].split("=")[1],
+			 model: querystring.substring(1).split('&')[6].split("=")[1],
+			 name: querystring.substring(1).split('&')[7].split("=")[1],
+			 token: querystring.substring(1).split('&')[8].split("=")[1],
                       }
                    });
   		}}();
@@ -20,7 +31,8 @@
 	
 <body>
 
-	<p style="color:white;">https://stesegment.github.io/webview-pass-deviceid?deviceId=0e8a50717ad3fd9b</p>
+	
+	<p style="color:white;">https://stesegment.github.io/webview-pass-deviceid?anonymousId=b18e315a-cb45-4ac9-b2e4-2a9f489263cb&id=0e8a50717ad3fd9b&type=android&advertisingId=e48f3926-fdea-34d2-a419-12a718d08f65&adTrackingEnabled=true&manufacturer=OnePlus&model=ONEPLUS%20A6013&name=OnePlus6T&token=doo2yFX</p>
 	
 <h1 style="font-family:verdana;color:red;">Test Web Page</h1>
 <h4 style="font-family:verdana;">The query string looks like:</h4>
