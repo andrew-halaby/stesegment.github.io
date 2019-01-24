@@ -17,7 +17,7 @@
 		// 2. adding context to the call
 		// analytics.page([category], [name], [properties], [options], [callback]);
 		var querystring = decodeURIComponent(document.location.search);
-		analytics.page({},'Passing Mobile Params',
+		analytics.page('Passing Mobile Params',
 			       {
 				anonymousId: querystring.substring(1).split('&')[0].split("=")[1],
 			        context:
