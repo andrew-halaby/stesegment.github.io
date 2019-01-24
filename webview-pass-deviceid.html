@@ -18,18 +18,19 @@
 		// analytics.page([category], [name], [properties], [options], [callback]);
 		var querystring = decodeURIComponent(document.location.search);
 		analytics.page({},{},
-			       {anonymousId: querystring.substring(1).split('&')[0].split("=")[1]},
-			       {
-				      device: {
-					 id: querystring.substring(1).split('&')[1].split("=")[1],
-					 type: querystring.substring(1).split('&')[2].split("=")[1],
-					 advertisingId: querystring.substring(1).split('&')[3].split("=")[1],
-					 adTrackingEnabled: querystring.substring(1).split('&')[4].split("=")[1],
-					 manufacturer: querystring.substring(1).split('&')[5].split("=")[1],
-					 model: querystring.substring(1).split('&')[6].split("=")[1],
-					 name: querystring.substring(1).split('&')[7].split("=")[1],
-					 token: querystring.substring(1).split('&')[8].split("=")[1],
-                      		}
+			       {anonymousId: querystring.substring(1).split('&')[0].split("=")[1],
+			        context:
+					{
+					      device: {
+						 id: querystring.substring(1).split('&')[1].split("=")[1],
+						 type: querystring.substring(1).split('&')[2].split("=")[1],
+						 advertisingId: querystring.substring(1).split('&')[3].split("=")[1],
+						 adTrackingEnabled: querystring.substring(1).split('&')[4].split("=")[1],
+						 manufacturer: querystring.substring(1).split('&')[5].split("=")[1],
+						 model: querystring.substring(1).split('&')[6].split("=")[1],
+						 name: querystring.substring(1).split('&')[7].split("=")[1],
+						 token: querystring.substring(1).split('&')[8].split("=")[1],
+					}
                    });
   		}}();
 	</script>
