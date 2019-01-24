@@ -15,9 +15,10 @@
 		// so we will set the aid in the first page call
 		
 		// 2. adding context to the call
+		// analytics.page([category], [name], [properties], [options], [callback]);
 		var querystring = decodeURIComponent(document.location.search);
-		analytics.page({},
-			       {anonymousId: document.location.search.substring(1).split('&')[0].split("=")[1]},
+		analytics.page({},{},
+			       {anonymousId: querystring.substring(1).split('&')[0].split("=")[1]},
 			       {
 				      device: {
 					 id: querystring.substring(1).split('&')[1].split("=")[1],
