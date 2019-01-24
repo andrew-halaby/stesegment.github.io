@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<!-- Segment snippet -->
+	<script>
+  		!function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+  		analytics.load("yRlbVBBNZlmxkOTk0HwS3JHjMrXPZAgB");
+		/* First Segment call is customized to overwrite the anonimusID with the value from the querystring */
+		
+		// 1. setting the anonymousId before the very first Segment call on the page
+		//analytics.user().anonymousId(document.location.search.substring(1).split('&')[0].split("=")[1]);
+		// unfortunately, although the syntax is correct we cannot do it here because analytics
+		// mightnot have fully loaded at this point in time and we would get an error like:
+		//      Uncaught TypeError: analytics.user is not a function
+		// so we will set the aid in the first page call
+		
+		// 2. adding context to the call
+		// analytics.page([category], [name], [properties], [options], [callback]);
+		var querystring = decodeURIComponent(document.location.search);
+		analytics.page('Passing Mobile Params',{},
+			       {
+              anonymousId: querystring.substring(1).split('&')[0].split("=")[1],
+			        context:
+                {
+                device:
+                  {
+                   type: querystring.substring(1).split('&')[1].split("=")[1],
+                   advertisingId: querystring.substring(1).split('&')[2].split("=")[1]
+                  }
+                },//context
+              integrations:
+                {
+                AppsFlyer:
+                  {
+                  appsFlyerId: '1415211453000-6513894'
+                  }
+                }//integration
+              });//page
+  		}}();
+	</script>
+	
+	</head>
+	
+	
+	
+<body>
+
+	
+	<p style="color:white;">https://stesegment.github.io/webview-appsflyer?anonymousId=aaa111bb-22cc-33dd-44ee-55fff66ggg77&type=android&advertisingId=advert26-idfa-idfa-idfa-advertadvert&appsflyerId=1415211453000-6513894</p>
+	
+<h1 style="font-family:verdana;color:red;">Test Web View for AppsFlyer</h1>
+<p>On this page we retrieve:
+- anonymousId
+- device type
+- advertisiing Id
+- AppsFlyer's Id
+from the query string and pass them on into the first page() call on the page
+</p>
+<h4 style="font-family:verdana;">The query string looks like:</h4>
+
+<pre style="font-size:60%;color:blue">
+	<script type="text/javascript">
+		document.write(window.location.search);
+	</script>
+</pre>
+
+<script type="text/javascript">
+function printQs() {
+	var output = {};
+	var qs = document.location.search.substring(1);
+	qs = qs.split('&');
+	for (var i = 0; i < qs.length; i++) {
+		var tokens = qs[i].split('=');
+		//output[tokens[0].toLowerCase()] = tokens[1];
+		document.write(tokens[0]+" = "+tokens[1]+"\n");
+		//document.write("\n");
+	}
+	//return output;
+}
+</script>
+	
+<h4 style="font-family:verdana;">and contains:</h4>
+	<pre style="font-size:100%;color:blue">
+		<script type="text/javascript">
+			document.write("\n");
+			printQs();
+		</script>
+	</pre>
+
+<script type="text/javascript">
+	// Calling Segment identify()
+	analytics.identify("appsflyeruser");
+</script>
+
+</body>
+</html>
