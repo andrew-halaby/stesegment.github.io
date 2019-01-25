@@ -9,13 +9,24 @@
 			if (querystring.substring(1).split('&')[4].split("=")[1] == "true"){adTrEn = true}; //booleanizing
 			// Saving context and integration objects for later
 			var segment_context = {
-			"device":
-			  {
-			   "type": querystring.substring(1).split('&')[1].split("=")[1],
-			   "advertisingId": querystring.substring(1).split('&')[2].split("=")[1],
-			   "adTrackingEnabled": adTrEn,
-			   "model": querystring.substring(1).split('&')[5].split("=")[1]
-			  }
+				"device":
+					{
+						"type": querystring.substring(1).split('&')[1].split("=")[1],
+						"advertisingId": querystring.substring(1).split('&')[2].split("=")[1],
+						"adTrackingEnabled": adTrEn,
+						"model": querystring.substring(1).split('&')[5].split("=")[1]
+					},
+				"app":
+					{
+					"name": querystring.substring(1).split('&')[6].split("=")[1],
+					"namespace": querystring.substring(1).split('&')[7].split("=")[1],
+					"version": querystring.substring(1).split('&')[8].split("=")[1]
+					},
+				"os":
+					{
+					"name": querystring.substring(1).split('&')[9].split("=")[1],
+					"version": querystring.substring(1).split('&')[10].split("=")[1]
+					}
 			};
 			var segment_integrations = {
 			"AppsFlyer":
@@ -45,12 +56,12 @@
 	
 <body>
 	
-	<a href="https://stesegment.github.io/webview-appsflyer?anonymousId=aaa111bb-22cc-33dd-44ee-55fff66ggg77&type=android&advertisingId=advert26-idfa-idfa-idfa-advertadvert&appsflyerId=44E02FA8-F7F0-4307-8228-F7B2733E9192&adTrackingEnabled=true&model=ONEPLUS%20A6013">
+	<a href="https://stesegment.github.io/webview-appsflyer?anonymousId=aaa111bb-22cc-33dd-44ee-55fff66ggg77&type=android&advertisingId=advert26-idfa-idfa-idfa-advertadvert&appsflyerId=44E02FA8-F7F0-4307-8228-F7B2733E9192&adTrackingEnabled=true&model=ONEPLUS%20A6013&app_name=SegTest&app_namespace=com.segment.stefano.segmenttest&app_version=1.0&os_name=Android&os_version=9">
 	Load this page with the right query string
 	</a>
 	
 <h1 style="font-family:verdana;color:red;">Test Web View for AppsFlyer</h1>
-<p>On this page we retrieve:</p>
+<p>On this page we retrieve some IDs collected within the Native App:</p>
 	<ul>
 		<li>anonymousId</li>
 		<li>device type</li>
@@ -58,8 +69,15 @@
 		<li>AppsFlyer Id</li>
 		<li>adTrackingEnabled</li>
 		<li>device model</li>
+		<li>app name</li>
+		<li>app namespace</li>
+		<li>app version</li>
+		<li>os name</li>
+		<li>os version</li>
 	</ul>
 <p>from the query string and pass them on into a track() and an identify() call.</p>
+<p>The native app has previously passed all these collected IDs to the Web View as "intent extras"</p>
+
 
 
 <h4 style="font-family:verdana;">The query string looks like:</h4>
