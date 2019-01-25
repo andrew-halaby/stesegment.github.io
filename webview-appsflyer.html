@@ -2,69 +2,40 @@
 <html>
 	<head>
 	<script>
-		//let's save the query string first, we'll need it within the snippet
-		var querystring = decodeURIComponent(document.location.search);
-		var adTrEn = false;
-		if (querystring.substring(1).split('&')[4].split("=")[1] == "true"){adTrEn = true}; //booleanizing
+		/* Query String Processing*/
+			//Saving query string first, we'll need it within the snippet
+			var querystring = decodeURIComponent(document.location.search);
+			var adTrEn = false;
+			if (querystring.substring(1).split('&')[4].split("=")[1] == "true"){adTrEn = true}; //booleanizing
+			// Saving context and integration objects for later
+			var segment_context = {
+			"device":
+			  {
+			   "type": querystring.substring(1).split('&')[1].split("=")[1],
+			   "advertisingId": querystring.substring(1).split('&')[2].split("=")[1],
+			   "adTrackingEnabled": adTrEn,
+			   "model": model: querystring.substring(1).split('&')[5].split("=")[1]
+			  }
+			};
+			var segment_integrations = {
+			"AppsFlyer":
+			  {
+			  "appsFlyerId": querystring.substring(1).split('&')[3].split("=")[1]
+			  }
+			};
+		
 		/* Segment Snippet */
-  		!function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
-  		//analytics.load("yRlbVBBNZlmxkOTk0HwS3JHjMrXPZAgB"); // js
-		analytics.load("JWiAqlQlRHIMLQ3GX24NF2zFDdvi34br"); // project
-		//analytics.load("kqzana1ex4BP0a3XmByBlIM77twD1W3Y"); //node.js
+			!function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+			//analytics.load("yRlbVBBNZlmxkOTk0HwS3JHjMrXPZAgB"); // js
+			analytics.load("JWiAqlQlRHIMLQ3GX24NF2zFDdvi34br"); // project
+			//analytics.load("kqzana1ex4BP0a3XmByBlIM77twD1W3Y"); //node.js
+
+			/* First Segment call ia a page(). But it won't be sent to AppsFlyer: 
+			   AppsFlyer is not accepting neither page() nor screen()
+			   we will probably remoe it
+			*/
+			analytics.page('WebView For AppsFlyer Test');
 		
-		/* First Segment call is customized to overwrite the anonimusID with the value from the querystring */
-		
-		// 1. setting the anonymousId before the very first Segment call on the page
-		//analytics.user().anonymousId(document.location.search.substring(1).split('&')[0].split("=")[1]);
-		// unfortunately, although the syntax is correct we cannot do it here because analytics
-		// mightnot have fully loaded at this point in time and we would get an error like:
-		//      Uncaught TypeError: analytics.user is not a function
-		// so we will set the aid in the first page call
-		
-		// 2. adding context to the call
-		// analytics.page([category], [name], [properties], [options], [callback]);
-		
-		analytics.page('Passing Mobile Params',{},
-			       {
-              anonymousId: querystring.substring(1).split('&')[0].split("=")[1],
-			        context:
-                {
-                device:
-                  {
-                   type: querystring.substring(1).split('&')[1].split("=")[1],
-                   advertisingId: querystring.substring(1).split('&')[2].split("=")[1],
-		   adTrackingEnabled: adTrEn,
-		   model: querystring.substring(1).split('&')[5].split("=")[1]
-                  }
-                },//context
-              integrations:
-                {
-                AppsFlyer:
-                  {
-                  appsFlyerId: querystring.substring(1).split('&')[3].split("=")[1]
-                  }
-                }//integration
-              });//page
-  		}}();
-		
-		
-		// let's save the context object and integration object in a var so we can use it later for all other Segment calls on the page
-		var segment_context = {
-                "device":
-                  {
-                   "type": querystring.substring(1).split('&')[1].split("=")[1],
-                   "advertisingId": querystring.substring(1).split('&')[2].split("=")[1],
-	           "adTrackingEnabled": adTrEn,
-		   "model": model: querystring.substring(1).split('&')[5].split("=")[1]
-                  }
-                };
-		
-		var segment_integrations = {
-                "AppsFlyer":
-                  {
-                  "appsFlyerId": querystring.substring(1).split('&')[3].split("=")[1]
-                  }
-                };
 		
 	</script>
 	
@@ -90,9 +61,8 @@
 		<li>adTrackingEnabled</li>
 		<li>device model</li>
 	</ul>
-<p>from the query string and pass them on into the first page() call on the page</p>
+<p>from the query string and pass them on into a track() and an identify() call.</p>
 
-<p><b>HOWEVER,</b> since Appsflyer doesn't accept page() calls (!!!) we will add all these parameters to an identify() call fired on this page</p>
 
 <h4 style="font-family:verdana;">The query string looks like:</h4>
 
@@ -125,8 +95,9 @@ function printQs() {
 		</script>
 	</pre>
 
+<!-- Segment Calls -->
 <script type="text/javascript">
-	// Calling Segment identify()
+	
 	// analytics.identify([userId], [traits], [options], [callback]);
 	analytics.identify("appsflyeruser",{},{
 		context: segment_context,
