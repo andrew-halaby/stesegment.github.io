@@ -132,8 +132,8 @@ function printQs() {
 	
 
 <script type="text/javascript">
-	var eventParams = "{\"af_revenue\":\"6.72\", \"af_content_type\": \"wallets\", \"af_content_id\": \"15854\"}";
-	segment_webview.track("WebView Event Occurred",eventParams);
+	var eventProperties = "{\"my_property\":\"my_value\", \"url\": \""+ decodeURIComponent(document.location.href)+"\"}";
+	segment_webview.track("WebView Event Occurred",eventProperties);
 </script>
 
 </body>
