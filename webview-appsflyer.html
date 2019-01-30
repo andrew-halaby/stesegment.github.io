@@ -132,14 +132,8 @@ function printQs() {
 	
 
 <script type="text/javascript">
-	
-	segment_webview.track("WebView Event Occurred",
-				   {
-			      		"url": decodeURIComponent(document.location.href),
-			      		"my_property": "my_value"
-			      	   }
-	);
-
+	var eventParams = "{\"af_revenue\":\"6.72\", \"af_content_type\": \"wallets\", \"af_content_id\": \"15854\"}";
+	segment_webview.track("WebView Event Occurred",eventParams);
 </script>
 
 </body>
