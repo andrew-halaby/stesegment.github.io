@@ -128,12 +128,18 @@ function printQs() {
 	//	context: segment_context,
 	//	integrations: segment_integrations
 	//});
+</script>
 	
+
+<script type="text/javascript">
 	
-	segment_webview.trackEvent("AppsFlyer WebView Event Miracolously Occurred",
-				   "{\"url\": \"" + decodeURIComponent(document.location.href) + "\"}",
+	segment_webview.track("WebView Event Occurred",
+				   "{
+			      		\"url\": \"" + decodeURIComponent(document.location.href) + "\",
+			      		\"my_property\":\"my_value\"
+			      	   }",
 	});
-	
+
 </script>
 
 </body>
