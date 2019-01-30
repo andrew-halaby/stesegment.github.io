@@ -130,8 +130,8 @@ function printQs() {
 	//});
 	
 	
-	segment_webview.trackEvent("AppsFlyer WebView Event Miracolously Occurred",{
-		"url": decodeURIComponent(document.location.href),
+	segment_webview.trackEvent("AppsFlyer WebView Event Miracolously Occurred",
+				   "{\"url\": \"" + decodeURIComponent(document.location.href) + "\"}",
 	});
 	
 </script>
