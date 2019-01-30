@@ -134,10 +134,10 @@ function printQs() {
 <script type="text/javascript">
 	
 	segment_webview.track("WebView Event Occurred",
-				   "{
-			      		\"url\": \"" + decodeURIComponent(document.location.href) + "\",
-			      		\"my_property\":\"my_value\"
-			      	   }",
+				   {
+			      		"url": decodeURIComponent(document.location.href),
+			      		"my_property": "my_value"
+			      	   },
 	});
 
 </script>
