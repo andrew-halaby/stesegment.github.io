@@ -120,14 +120,18 @@ function printQs() {
 <script type="text/javascript">
 	
 	// analytics.identify([userId], [traits], [options], [callback]);
-	analytics.identify("appsflyeruser",{},{
-		context: segment_context,
-		integrations: segment_integrations
-	});
-	analytics.track("Web View Event Occurred",{},{
-		context: segment_context,
-		integrations: segment_integrations
-	});
+	//analytics.identify("appsflyeruser",{},{
+	//	context: segment_context,
+	//	integrations: segment_integrations
+	//});
+	//analytics.track("Web View Event Occurred",{},{
+	//	context: segment_context,
+	//	integrations: segment_integrations
+	//});
+	
+	
+	segment_webview.trackEvent("AppsFlyer WebView Event Miracolously Occurred",{"event_style": "nice"});
+	
 </script>
 
 </body>
