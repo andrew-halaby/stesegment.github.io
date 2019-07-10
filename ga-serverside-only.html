@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<!-- Segment snippet -->
+	<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+  analytics.load("vN5PiUZsjp1GMwpNazLHEswGaSpL300f");
+  analytics.page();
+  }}();
+  </script>
+	
+	</head>
+	
+	
+	
+<body>
+
+	<p style="color:white;">https://stesegment.github.io/webview-pass-ids?userId=user007&anonymousId=b18e315a-cb45-4ac9-b2e4-2a9f489263cb</p>
+	
+<h1 style="font-family:verdana;color:red;">Test Web Page</h1>
+<h4 style="font-family:verdana;">Sending data into Segment and from there to GA only and Server Side only</h4>
+
+<p>sending:
+- the first page() call included in the snippet
+- identify()
+- a second page view()
+</p>
+
+
+<script type="text/javascript">
+	// Calling Segment identify()
+	analytics.identify('geeaai',{email: "geeaai@offline.com});
+  // calling page
+  analytics.page();
+</script>
+
+</body>
+</html>
