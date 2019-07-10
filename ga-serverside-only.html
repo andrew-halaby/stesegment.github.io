@@ -18,7 +18,13 @@
 	<p style="color:white;">https://stesegment.github.io/webview-pass-ids?userId=user007&anonymousId=b18e315a-cb45-4ac9-b2e4-2a9f489263cb</p>
 	
 <h1 style="font-family:verdana;color:red;">Test Web Page</h1>
-<h4 style="font-family:verdana;">Sending data into Segment and from there to GA only and Server Side only</h4>
+<h4 style="font-family:verdana;">Sending data into Segment and from there to GA only and cloud mode</h4>
+<h4 style="font-family:verdana;">A Node.js source is also sending data into the same property</h4>
+	
+	<p>The purpose of this test is to verify that by using the same userId in Segment
+		both inn js and node
+		the events tracked for this user will be associated to the same user in GA
+	</p>
 
 <p>sending:
 - the first page() call included in the snippet
@@ -29,7 +35,7 @@
 
 <script type="text/javascript">
 	// Calling Segment identify()
-	analytics.identify('geeaai',{email: "geeaai@offline.com});
+	analytics.identify('geeaai',{email: "geeaai@offline.com"});
   // calling page
   analytics.page();
 </script>
