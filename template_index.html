@@ -1,0 +1,111 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Home Questionnaire</title> 
+    
+    <!--Placeholder for Segment Snippet --> 
+    <script>
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var o=document.getElementsByTagName("script")[0];o.parentNode.insertBefore(n,o);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+      // TODO: add <your segment write key> on the next line and uncomment (or copy paste your entire snippet from your web source on your workspace ;-)
+      //analytics.load("<your segment write key>");
+      analytics.page();
+      }}();
+    </script>
+
+</head> 
+<body>
+
+    <script>
+            //just adding a constructor to the String object
+            // will be using it to create a userID from email
+            String.prototype.hashCode = function() {
+                var hash = 0;
+                if (this.length == 0) {
+                    return hash;
+                }
+                for (var i = 0; i < this.length; i++) {
+                    var char = this.charCodeAt(i);
+                    hash = ((hash<<5)-hash)+char;
+                    hash = hash & hash; // Convert to 32bit integer
+                }
+                return hash;
+            }
+    </script>
+    
+    
+<h1>What is your favorite place to travel?</h1> 
+<p>I am building a directory of the sweetest travel destinations.</p>  
+<form name="travel" onsubmit="identify(event)">
+     What is your favorite travel destination?
+    <input name="destination" required="" size="81" type="text" value="Chicago"/> 
+    <br><br><br> 
+    Any recommendations (cool things to do, places to visit or restaurants to eat)? 
+    <br><br> 
+    <textarea cols="81" name="details" required="" rows="10">check out the fantastic food</textarea> 
+    <br><br> 
+    Name: <input name="fullname" required="" size="75" type="text" value="Johnny Cash"/> 
+    <br><br> 
+    Email: <input name="email" required="" size="75" type="email" value="johnny@cash.io"/> 
+    <br><br>
+    
+    Segment userId: <input name="userId" required="" size="75" type="text" value="jc1000000"/> 
+    <br><br>
+    
+    
+    <input name="submit" type="submit" value="submit"/>
+</form> 
+
+    <!--Placeholder for identify and track script -->
+    <script type="text/javascript">
+      function identify(e){
+        e.preventDefault();
+        var form = e.target;
+        var email = form["email"].value;
+        var fullname = form["fullname"].value;
+        var destination = form["destination"].value;
+        var details = form["details"].value;
+        var user = {
+            email: email, 
+            name: fullname, 
+            destination: destination, 
+            details: details
+        };
+        
+        //in this case we grab the userId from the form, very unlikely IRL
+        var myUserId = form["userId"].value;
+          
+        analytics.identify(myUserId, {
+            email: email,
+            name: fullname
+        });
+        
+        //or alternatively, more in the realm of possible IRL:
+        //
+        //analytics.identify(email.hashCode, {
+        //    email: email,
+        //    name: fullname
+        //});
+          
+        //analytics.track(event, [properties], [options], [callback]);
+        analytics.track(
+                'Destination Submitted',
+                {
+                  label: 'client side',
+                  user
+                  // { context: { ip: "0.0.0.0" }}, //with this we would override the value for ip in context
+                });
+       
+      }
+    </script>
+    
+    <div id="target-container"></div>
+    
+    <br/><br/>
+    
+    
+    <!-- button to reset a.js -->
+    <button type="button" onclick="analytics.reset();">analytics.reset();</button>
+
+    
+</body> 
+</html>
